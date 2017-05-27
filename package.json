@@ -23,9 +23,7 @@
   },
   "homepage": "https://github.com/mjangir/fmdownload#readme",
   "dependencies": {
-    "chalk": "^1.1.3",
     "commander": "^2.9.0",
-    "mkdirp": "^0.5.1",
     "progress": "^2.0.0",
     "request": "^2.81.0",
     "request-progress": "^3.0.0"

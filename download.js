@@ -2,9 +2,8 @@ var url 			= require('url');
 var request 		= require('request');
 var fs 				= require('fs');
 var path 			= require('path');
-var mkdirp 			= require('mkdirp');
-var progress 		= require('request-progress');
-var ProgressBar 	= require('progress');
+var progress  		= require('request-progress');
+var ProgressBar  	= require('progress');
 var API_BASE 		= require('./config').API_BASE_URL;
 var VIDEO_URLS 		= [];
 var TOTAL_COMPLETED = 0;
@@ -34,7 +33,13 @@ var processCourseInfo = function(body)
 	directory = __dirname + '/videos/' + body.title;
 
 	// Create a video directory if not exists
-	mkdirp(directory, '0777');
+	directory.split('/').forEach((dir, index, splits) => {
+		const parent 	= splits.slice(0, index).join('/');
+	  	const dirPath 	= path.resolve(parent, dir);
+	  	if (!fs.existsSync(dirPath)) {
+	    	fs.mkdirSync(dirPath);
+	  	}
+	});
 
 	// Grab Lesson Data
 	if(body.lessonData) {
@@ -52,8 +57,6 @@ var processCourseInfo = function(body)
 			};
 		});
 	}
-
-	videos = videos.splice(5);
 
 	VIDEO_URLS = videos;
 
