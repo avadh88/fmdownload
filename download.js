@@ -65,6 +65,7 @@ var processCourseInfo = function(body)
 }
 
 var startDownloading = function(video) {
+	if(fs.existsSync(video.destination)) {TOTAL_COMPLETED++; startDownloading(VIDEO_URLS[TOTAL_COMPLETED]);   return false;}
 	request(video.url)
 	.on('response', function handleResponse(res) {
 
