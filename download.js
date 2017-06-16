@@ -40,7 +40,20 @@ var processCourseInfo = function(body)
 	    	fs.mkdirSync(dirPath);
 	  	}
 	});
-
+	//resorce download and write on the txt file.
+        if (body.resources) {
+		var resorce_file_name = directory + '/' + body.slug + '.txt';
+		var logger = fs.createWriteStream(resorce_file_name, {
+		    flags: 'a' // 'a' means appending (old data will be preserved)
+		})
+		body.resources.map(function(obj, index) {
+		    logger.write('==========================================================' + '\r\n')
+		    logger.write(index + ')  ' + obj.label + '\r\n') // append string to your file
+		    logger.write(obj.url + '\r\n');
+		    logger.write('==========================================================' + '\r\n')
+		});
+		logger.end();
+    	}
 	// Grab Lesson Data
 	if(body.lessonData) {
 
