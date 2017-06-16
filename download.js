@@ -47,8 +47,8 @@ var processCourseInfo = function(body)
 		videos = body.lessonData.map(function(obj, index){
 			var seq 		= index + 1,
 				url 		= API_BASE + '/video/' + obj.statsId + '?r=720&f=webm',
-				destination = directory + '/' + seq + ' - ' + obj.title + '.webm',
-				title 		= obj.title;
+				destination = directory + '/' + seq + ' - ' + obj.slug + '.webm',
+				title 		= obj.slug;
 
 			return {
 				url 		: url,
